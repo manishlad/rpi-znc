@@ -1,6 +1,8 @@
-FROM resin/rpi-raspbian:jessie
+FROM resin/armv7hf-debian-qemu
 
 MAINTAINER Manish Lad <manish@lad.eu.com>
+
+RUN [ "cross-build-start" ]
 
 RUN apt-get update && \
     apt-get -y install build-essential && \
@@ -12,6 +14,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     useradd --create-home --shell /bin/bash znc
+
+RUN [ "cross-build-end" ]
 
 USER znc
 
